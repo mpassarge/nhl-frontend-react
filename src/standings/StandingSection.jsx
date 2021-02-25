@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import StandingsCard from './StandingsCard';
 import { breakpointUp } from '../mediaQueries'
 import { css } from '@emotion/react'
+import Modal from 'react-modal';
 
 // Figure out 
 const styles = css({
@@ -49,8 +50,7 @@ const styles = css({
             height: '65%',
         },
     },
-    [breakpointUp('large')]: {
-        // backgroundColor: 'blue',
+    [breakpointUp('mediumLarge')]: {
         '.standingsCard': {
             display: 'flex',
             flexWrap: 'wrap',
@@ -69,6 +69,22 @@ const combineTeams = (standingsData) => {
     return combinedTeams;
 }
 
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)',
+        width: '50%',
+        height: '50%',
+    },
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    }
+};
+
 const StandingSection = ({standingsData}) => {
 
     const [combined, setCombined] = useState(false);
@@ -76,8 +92,24 @@ const StandingSection = ({standingsData}) => {
     const combineStats = () => {
         setCombined(!combined);
     };
+    const [modalIsOpen,setIsOpen] = React.useState(false);
+    function openModal() {
+      setIsOpen(true);
+    }
+   
+    function closeModal(){
+      setIsOpen(false);
+    }
+    
+    useEffect(() => {
+        Modal.setAppElement('#root');        
+    }, [])
 
     return <section css={styles}>
+        <Modal style={customStyles} isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Example Modal">
+            <h1>Hello World!!!</h1>
+            <button onClick={closeModal}>close</button>
+        </Modal>
         <div className="actions">
             <div className="combineSwitch">
                 <p>Combined</p>
@@ -85,13 +117,13 @@ const StandingSection = ({standingsData}) => {
                 <label htmlFor="switch" className="toggle" />
             </div>
 
-            <button disabled id="showHideStats">Show/Hide Stats</button>
+            <button onClick={openModal} id="showHideStats">Show/Hide Stats</button>
         </div>
         <div className="standingsCard">
             { !combined && Object.keys(standingsData).map(division => {
-                return <StandingsCard key={division} divisionName={division} teams={standingsData[division]} />
+                return <StandingsCard key={division} divisionName={division} teams={standingsData[division]} isCombined={combined} />
             })}
-            {combined && <StandingsCard key="all" divisionName="All" teams={combineTeams(standingsData)} />}
+            {combined && <StandingsCard key="all" divisionName="All" teams={combineTeams(standingsData)} isCombined={combined}/>}
         </div>
     </section>;
 }

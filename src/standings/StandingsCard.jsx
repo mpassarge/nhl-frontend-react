@@ -4,7 +4,7 @@ import React from 'react';
 import { css } from '@emotion/react'
 import { breakpointUp } from '../mediaQueries';
 
-const containerStyles = css({
+const containerStyles = (isCombined) => css({
     border: "1px solid black",
     ':not(:last-child)': {
         marginBottom: '2rem',
@@ -33,19 +33,28 @@ const containerStyles = css({
     },
     [`thead tr th:nth-of-type(1), 
     tbody tr td:nth-of-type(1)`]: {
-        width: '12em',
-    },  
-    [breakpointUp('large')]: {
+        width: '40%',
+    },
+    [breakpointUp('mediumLarge')]: {
+        [`thead tr th:nth-of-type(1), 
+        tbody tr td:nth-of-type(1)`]: {
+            width: '45%',
+        },
         ':not(:last-child)': {
             marginBottom: '0rem',
         },
         flex: '1 0 40%',
-    }
+    },
+    [isCombined && breakpointUp('medium')]: {
+        [`thead tr th:nth-of-type(1), 
+        tbody tr td:nth-of-type(1)`]: {
+            width: '30%',
+        },
+    },
 });
 
-const StandingsCard = ({ divisionName, teams }) => {
-
-    return <div css={containerStyles}>
+const StandingsCard = ({ divisionName, teams, isCombined }) => {
+    return <div css={containerStyles(isCombined)}>
         <h2>{divisionName.replace('-', ' ')}</h2>
         <table>
             <thead>

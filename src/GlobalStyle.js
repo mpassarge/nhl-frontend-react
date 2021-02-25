@@ -45,7 +45,13 @@ const GlobalStyles = {
   table: {
     borderCollapose: 'collapse',
     borderSpacing: 0,
-  }
+  },
+
+  // For disabling scrolling when a modal is open
+  'body.ReactModal__Body--open': {
+    height: '100vh',
+    overflowY: 'hidden',
+  },
 }
 
 export default GlobalStyles;
