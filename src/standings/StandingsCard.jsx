@@ -28,7 +28,8 @@ const containerStyles = (isCombined) => css({
         borderTop: '1px solid black',
     },
     'tbody tr:nth-of-type(even)': {
-        backgroundColor: 'red',
+        backgroundColor: 'rgb(4,30,66, 0.3)',
+        
     },
     [`thead tr th:nth-of-type(1), 
     tbody tr td:nth-of-type(1)`]: {
