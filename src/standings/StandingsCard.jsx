@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
 import { css } from '@emotion/react'
 import { breakpointUp } from '../mediaQueries';
 
@@ -61,6 +60,7 @@ const StandingsCard = ({ divisionName, teams, isCombined }) => {
                 <tr>
                     <th>Team</th>
                     <th>Points</th>
+                    <th>Games Played</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,6 +68,7 @@ const StandingsCard = ({ divisionName, teams, isCombined }) => {
                     <tr key={team.name}>
                         <td>{team.name}</td>
                         <td>{team.points}</td>
+                        <td>{team.gamesPlayed}</td>
                     </tr>
                 )}
             </tbody>

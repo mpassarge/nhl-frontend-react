@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect,useState } from 'react';
+import { useState } from 'react';
 import StandingsCard from './StandingsCard';
 import { breakpointUp } from '../mediaQueries'
 import { css } from '@emotion/react'
-import Modal from 'react-modal';
 
 // Figure out 
 const styles = css({
@@ -50,7 +49,7 @@ const styles = css({
             height: '65%',
         },
     },
-    [breakpointUp('mediumLarge')]: {
+    [breakpointUp('large')]: {
         '.standingsCard': {
             display: 'flex',
             flexWrap: 'wrap',
@@ -69,22 +68,6 @@ const combineTeams = (standingsData) => {
     return combinedTeams;
 }
 
-const customStyles = {
-    content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
-        width: '50%',
-        height: '50%',
-    },
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    }
-};
-
 const StandingSection = ({standingsData}) => {
 
     const [combined, setCombined] = useState(false);
@@ -92,32 +75,14 @@ const StandingSection = ({standingsData}) => {
     const combineStats = () => {
         setCombined(!combined);
     };
-    const [modalIsOpen,setIsOpen] = React.useState(false);
-    function openModal() {
-      setIsOpen(true);
-    }
-   
-    function closeModal(){
-      setIsOpen(false);
-    }
-    
-    useEffect(() => {
-        Modal.setAppElement('#root');        
-    }, [])
 
     return <section css={styles}>
-        <Modal style={customStyles} isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Example Modal">
-            <h1>Hello World!!!</h1>
-            <button onClick={closeModal}>close</button>
-        </Modal>
         <div className="actions">
             <div className="combineSwitch">
                 <p>Combined</p>
                 <input onClick={combineStats} type="checkbox" id="switch" className="checkbox"/>
                 <label htmlFor="switch" className="toggle" />
             </div>
-
-            <button onClick={openModal} id="showHideStats">Show/Hide Stats</button>
         </div>
         <div className="standingsCard">
             { !combined && Object.keys(standingsData).map(division => {
