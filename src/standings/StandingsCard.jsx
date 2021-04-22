@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Col, Table } from 'antd';
-
+import { PushpinTwoTone } from "@ant-design/icons";
 
 const columns = [
     {
@@ -26,6 +27,19 @@ const titleStyle = {
     fontSize: '1.3rem',
 }
 
+const Title = (props) => {
+    const [pinned, setPinned] = useState(false);
+
+    const clicked = () => {
+        setPinned(!pinned);
+    }
+
+    return  <>
+                <p style={titleStyle}>{props.divisionName.replace('-', ' ')}</p>
+                <PushpinTwoTone onClick={clicked} rotate={pinned ? -45 : 0} />
+            </>
+};
+
 const StandingsCard = ({ divisionName, teams, isCombined }) => {
     const colWidthLarge = isCombined ? 24 : 12;
     return <>
@@ -36,7 +50,7 @@ const StandingsCard = ({ divisionName, teams, isCombined }) => {
                 bordered
                 size="small"
                 rowKey={row => row.id}
-                title={() => <p style={titleStyle}>{divisionName.replace('-', ' ')}</p>}
+                title={() => <Title divisionName={divisionName}></Title>}
                 pagination={false}
             />
         </Col>
