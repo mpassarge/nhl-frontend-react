@@ -1,3 +1,5 @@
+import { CSSObject } from "@emotion/serialize";
+
 const GlobalStyles = {
   '*': {
     padding: 0,
@@ -52,6 +54,6 @@ const GlobalStyles = {
     height: '100vh',
     overflowY: 'hidden',
   },
-}
+} as CSSObject
 
 export default GlobalStyles;

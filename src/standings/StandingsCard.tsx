@@ -25,7 +25,7 @@ const titleStyle = {
     textTransform: 'capitalize',
     textAlign: 'center',
     fontSize: '1.3rem',
-}
+} as React.CSSProperties;
 
 const Title = (props) => {
     const [pinned, setPinned] = useState(false);
