@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getStandings } from '../api'
 import StandingsCard from './StandingsCard';
 import { Switch, Row } from 'antd';
 
@@ -14,9 +15,19 @@ const combineTeams = (standingsData) => {
     return combinedTeams;
 }
 
-const StandingSection = ({standingsData}) => {
+const StandingSection = () => {
 
     const [combined, setCombined] = useState(false);
+    const [standings, setStandings] = useState([]);
+
+    useEffect(() => {
+      getStandings()
+        .then(d => {
+          setStandings(d.data);
+        }).catch(e => {
+          console.error(e);
+        });
+    }, []);
 
     const combineStats = () => {
         setCombined(!combined);
@@ -29,10 +40,10 @@ const StandingSection = ({standingsData}) => {
         </div>
         <br/>
         <Row gutter={[16, 24]}>
-            { !combined && Object.keys(standingsData).map(division => {
-                return <StandingsCard key={division} divisionName={division} teams={standingsData[division]} isCombined={combined} />
+            { !combined && Object.keys(standings).map(division => {
+                return <StandingsCard key={division} divisionName={division} teams={standings[division]} isCombined={combined} />
             })}
-            {combined && <StandingsCard key="all" divisionName="All" teams={combineTeams(standingsData)} isCombined={combined}/>}
+            {combined && <StandingsCard key="all" divisionName="All" teams={combineTeams(standings)} isCombined={combined}/>}
         </Row>
     </section>;
 }
