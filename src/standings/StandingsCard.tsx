@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Col, Table } from "antd";
 import { PushpinTwoTone } from "@ant-design/icons";
-
+import { Team } from "./Models"
 const columns = [
     {
         title: "Team",
@@ -27,7 +27,10 @@ const titleStyle = {
     fontSize: "1.3rem",
 } as React.CSSProperties;
 
-const Title = (props) => {
+interface TitleProps {
+    divisionName: string
+}
+const Title = (props: TitleProps) => {    
     const [pinned, setPinned] = useState(false);
 
     const clicked = () => {
@@ -42,7 +45,13 @@ const Title = (props) => {
     );
 };
 
-const StandingsCard = ({ divisionName, teams, isCombined }) => {
+interface StandingsCardProps {
+    divisionName: string,
+    teams: Team[],
+    isCombined: boolean
+}
+
+const StandingsCard = ({ divisionName, teams, isCombined }: StandingsCardProps) => {
     const colWidthLarge = isCombined ? 24 : 12;
     return (
         <>

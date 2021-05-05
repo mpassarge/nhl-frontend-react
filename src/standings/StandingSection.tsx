@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { getStandings } from "../api";
 import StandingsCard from "./StandingsCard";
 import { Switch, Row } from "antd";
+import { Division, Team } from "./Models";
 
-const combineTeams = (standingsData) => {
-    let combinedTeams = [];
-    Object.keys(standingsData).forEach((division) => {
-        combinedTeams.push(...standingsData[division]);
-    });
+const combineTeams = (divisions: Division[]): Team[] => {
+    console.log(divisions);
+
+    let combinedTeams: Team[] = [];
+    divisions.map(division =>
+        combinedTeams.push(...division.teams)
+    );
     combinedTeams.sort((a, b) => {
         return b.points - a.points;
     });
@@ -16,12 +19,12 @@ const combineTeams = (standingsData) => {
 
 const StandingSection = () => {
     const [combined, setCombined] = useState(false);
-    const [standings, setStandings] = useState([]);
+    const [standings, setStandings] = useState<Division[]>([]);
 
     useEffect(() => {
         getStandings()
             .then((d) => {
-                setStandings(d.data);
+                setStandings(d.data.standings);
             })
             .catch((e) => {
                 console.error(e);
@@ -41,16 +44,14 @@ const StandingSection = () => {
             <br />
             <Row gutter={[16, 24]}>
                 {!combined &&
-                    Object.keys(standings).map((division) => {
-                        return (
-                            <StandingsCard
-                                key={division}
-                                divisionName={division}
-                                teams={standings[division]}
-                                isCombined={combined}
-                            />
-                        );
-                    })}
+                    standings.map((s) => (
+                        <StandingsCard
+                            key={s.divisionName}
+                            divisionName={s.divisionName}
+                            teams={s.teams}
+                            isCombined={combined}
+                        />
+                    ))}
                 {combined && (
                     <StandingsCard
                         key="all"

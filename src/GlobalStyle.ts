@@ -40,7 +40,7 @@ const GlobalStyles = {
     },
     [`blockquote:before, blockquote:after,
   q:before, q:after`]: {
-        content: "",
+        // 'content': "",
         // eslint-disable-next-line no-dupe-keys
         content: "none",
     },
