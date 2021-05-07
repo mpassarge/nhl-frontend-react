@@ -5,16 +5,9 @@ import { Switch, Row } from "antd";
 import { Division, Team } from "./Models";
 
 const combineTeams = (divisions: Division[]): Team[] => {
-    console.log(divisions);
-
-    let combinedTeams: Team[] = [];
-    divisions.map(division =>
-        combinedTeams.push(...division.teams)
-    );
-    combinedTeams.sort((a, b) => {
-        return b.points - a.points;
-    });
-    return combinedTeams;
+    return divisions
+        .flatMap((d) => d.teams)
+        .sort((a, b) => b.points - a.points);
 };
 
 const StandingSection = () => {
@@ -44,11 +37,11 @@ const StandingSection = () => {
             <br />
             <Row gutter={[16, 24]}>
                 {!combined &&
-                    standings.map((s) => (
+                    standings.map((standing) => (
                         <StandingsCard
-                            key={s.divisionName}
-                            divisionName={s.divisionName}
-                            teams={s.teams}
+                            key={standing.divisionName}
+                            divisionName={standing.divisionName}
+                            teams={standing.teams}
                             isCombined={combined}
                         />
                     ))}

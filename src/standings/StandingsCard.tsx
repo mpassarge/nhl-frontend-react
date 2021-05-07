@@ -28,19 +28,15 @@ const titleStyle = {
 } as React.CSSProperties;
 
 interface TitleProps {
-    divisionName: string
+    divisionName: string;
+    pin(): void;
+    pinned: boolean;
 }
 const Title = (props: TitleProps) => {    
-    const [pinned, setPinned] = useState(false);
-
-    const clicked = () => {
-        setPinned(!pinned);
-    };
-
     return (
         <>
             <p style={titleStyle}>{props.divisionName.replace("-", " ")}</p>
-            <PushpinTwoTone onClick={clicked} rotate={pinned ? -45 : 0} />
+            <PushpinTwoTone onClick={props.pin} rotate={props.pinned ? -45 : 0} />
         </>
     );
 };
@@ -52,6 +48,13 @@ interface StandingsCardProps {
 }
 
 const StandingsCard = ({ divisionName, teams, isCombined }: StandingsCardProps) => {
+
+    const [pinned, setPinned] = useState(false);
+
+    const pin = () => {
+        setPinned(!pinned);
+    }
+
     const colWidthLarge = isCombined ? 24 : 12;
     return (
         <>
@@ -62,7 +65,7 @@ const StandingsCard = ({ divisionName, teams, isCombined }: StandingsCardProps) 
                     bordered
                     size="small"
                     rowKey={(row) => row.id}
-                    title={() => <Title divisionName={divisionName}></Title>}
+                    title={() => <Title pinned={pinned} pin={pin} divisionName={divisionName}></Title>}
                     pagination={false}
                 />
             </Col>
