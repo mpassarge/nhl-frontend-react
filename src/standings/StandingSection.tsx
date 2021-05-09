@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { getStandings } from "../api";
+import { useState } from "react";
 import StandingsCard from "./StandingsCard";
 import { Switch, Row } from "antd";
 import { Division, Team } from "./Models";
+import { useSelector } from "react-redux";
 
 const combineTeams = (divisions: Division[]): Team[] => {
     return divisions
@@ -12,17 +12,8 @@ const combineTeams = (divisions: Division[]): Team[] => {
 
 const StandingSection = () => {
     const [combined, setCombined] = useState(false);
-    const [standings, setStandings] = useState<Division[]>([]);
 
-    useEffect(() => {
-        getStandings()
-            .then((d) => {
-                setStandings(d.data.standings);
-            })
-            .catch((e) => {
-                console.error(e);
-            });
-    }, []);
+    const standings = useSelector<any>(state => state.standings) as any[];
 
     const combineStats = () => {
         setCombined(!combined);

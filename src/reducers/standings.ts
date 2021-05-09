@@ -1,0 +1,12 @@
+const initialState = {"standings":[{"divisionName":"discover-central","teams":[{"id":12,"name":"Carolina Hurricanes","points":80,"gamesPlayed":54},{"id":14,"name":"Tampa Bay Lightning","points":75,"gamesPlayed":54},{"id":13,"name":"Florida Panthers","points":75,"gamesPlayed":54},{"id":18,"name":"Nashville Predators","points":60,"gamesPlayed":54},{"id":25,"name":"Dallas Stars","points":58,"gamesPlayed":54},{"id":16,"name":"Chicago Blackhawks","points":52,"gamesPlayed":54},{"id":17,"name":"Detroit Red Wings","points":47,"gamesPlayed":55},{"id":29,"name":"Columbus Blue Jackets","points":46,"gamesPlayed":55}]},{"divisionName":"honda-west","teams":[{"id":54,"name":"Vegas Golden Knights","points":78,"gamesPlayed":53},{"id":21,"name":"Colorado Avalanche","points":74,"gamesPlayed":52},{"id":30,"name":"Minnesota Wild","points":73,"gamesPlayed":53},{"id":19,"name":"St. Louis Blues","points":57,"gamesPlayed":52},{"id":53,"name":"Arizona Coyotes","points":52,"gamesPlayed":55},{"id":26,"name":"Los Angeles Kings","points":48,"gamesPlayed":52},{"id":28,"name":"San Jose Sharks","points":48,"gamesPlayed":54},{"id":24,"name":"Anaheim Ducks","points":42,"gamesPlayed":55}]},{"divisionName":"massmutual-east","teams":[{"id":5,"name":"Pittsburgh Penguins","points":75,"gamesPlayed":55},{"id":15,"name":"Washington Capitals","points":73,"gamesPlayed":54},{"id":6,"name":"Boston Bruins","points":71,"gamesPlayed":53},{"id":2,"name":"New York Islanders","points":68,"gamesPlayed":54},{"id":3,"name":"New York Rangers","points":58,"gamesPlayed":55},{"id":4,"name":"Philadelphia Flyers","points":55,"gamesPlayed":54},{"id":1,"name":"New Jersey Devils","points":45,"gamesPlayed":54},{"id":7,"name":"Buffalo Sabres","points":37,"gamesPlayed":55}]},{"divisionName":"scotia-north","teams":[{"id":10,"name":"Toronto Maple Leafs","points":74,"gamesPlayed":53},{"id":22,"name":"Edmonton Oilers","points":66,"gamesPlayed":52},{"id":52,"name":"Winnipeg Jets","points":59,"gamesPlayed":52},{"id":8,"name":"Montréal Canadiens","points":57,"gamesPlayed":53},{"id":20,"name":"Calgary Flames","points":47,"gamesPlayed":51},{"id":9,"name":"Ottawa Senators","points":47,"gamesPlayed":53},{"id":23,"name":"Vancouver Canucks","points":43,"gamesPlayed":48}]}]};
+
+const standingsReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case 'PIN':
+            return state;
+        default:
+            return state
+    }
+}
+
+export default standingsReducer;
