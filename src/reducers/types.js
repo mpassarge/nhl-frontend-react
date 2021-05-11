@@ -1,0 +1,1 @@
+export const GET_STANDINGS = 'GET_STANDINGS';

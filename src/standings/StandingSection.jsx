@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StandingsCard from "./StandingsCard";
 import { Switch, Row } from "antd";
-import { Division, Team } from "./Models";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { getStandings } from "../actions/standingsActions";
 
-const combineTeams = (divisions: Division[]): Team[] => {
+const combineTeams = (divisions) => {
     return divisions
         .flatMap((d) => d.teams)
         .sort((a, b) => b.points - a.points);
 };
 
-const StandingSection = () => {
+const StandingSection = (props) => {
     const [combined, setCombined] = useState(false);
 
-    const standings = useSelector<any>(state => state.standings) as any[];
+    const { getStandings, standings } = props;
+    useEffect(() => {
+        getStandings();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const combineStats = () => {
         setCombined(!combined);
@@ -49,4 +53,10 @@ const StandingSection = () => {
     );
 };
 
-export default StandingSection;
+const mapStateToProps = (state) => {
+    return {
+        standings: state.standings.standings,
+    };
+};
+
+export default connect(mapStateToProps, { getStandings })(StandingSection);

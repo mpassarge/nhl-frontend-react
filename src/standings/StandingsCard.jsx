@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Col, Table } from "antd";
 import { PushpinTwoTone } from "@ant-design/icons";
-import { Team } from "./Models"
+
 const columns = [
     {
         title: "Team",
@@ -25,14 +25,9 @@ const titleStyle = {
     textTransform: "capitalize",
     textAlign: "center",
     fontSize: "1.3rem",
-} as React.CSSProperties;
+};
 
-interface TitleProps {
-    divisionName: string;
-    pin(): void;
-    pinned: boolean;
-}
-const Title = (props: TitleProps) => {    
+const Title = (props) => {    
     return (
         <>
             <p style={titleStyle}>{props.divisionName.replace("-", " ")}</p>
@@ -41,13 +36,7 @@ const Title = (props: TitleProps) => {
     );
 };
 
-interface StandingsCardProps {
-    divisionName: string,
-    teams: Team[],
-    isCombined: boolean
-}
-
-const StandingsCard = ({ divisionName, teams, isCombined }: StandingsCardProps) => {
+const StandingsCard = ({ divisionName, teams, isCombined }) => {
 
     const [pinned, setPinned] = useState(false);
 
