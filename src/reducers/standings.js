@@ -1,4 +1,4 @@
-import { GET_STANDINGS } from "./types";
+import { SET_STANDINGS } from "./types";
 
 const initialState = {
     divisions: []
@@ -6,7 +6,7 @@ const initialState = {
 
 const standingsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case GET_STANDINGS:
+        case SET_STANDINGS:
             return {
                 ...state,
                 divisions: action.payload

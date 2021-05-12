@@ -1,11 +1,11 @@
 import axios from "axios";
-import { GET_STANDINGS } from "../reducers/types";
+import { SET_STANDINGS } from "../reducers/types";
 
 export const getStandings = () => async (dispatch) => {    
     try {        
         const res = await axios.get(`http://localhost:9080/nhl/standings`);        
         dispatch({
-            type: GET_STANDINGS,
+            type: SET_STANDINGS,
             payload: res.data.standings,
         });
     } catch (e) {

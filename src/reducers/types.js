@@ -1,1 +1,1 @@
-export const GET_STANDINGS = 'GET_STANDINGS';
+export const SET_STANDINGS = 'SET_STANDINGS';
