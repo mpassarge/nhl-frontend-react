@@ -1,7 +1,7 @@
 import { GET_STANDINGS } from "./types";
 
 const initialState = {
-    standings: [],
+    divisions: [],
     loading: true,
 }
 
@@ -10,7 +10,7 @@ const standingsReducer = (state = initialState, action) => {
         case GET_STANDINGS:
             return {
                 ...state,
-                standings: action.payload,
+                divisions: action.payload,
                 loading: false
             }
         default:

@@ -11,9 +11,10 @@ const combineTeams = (divisions) => {
 };
 
 const StandingSection = (props) => {
+    const { getStandings, standings } = props;
+    
     const [combined, setCombined] = useState(false);
 
-    const { getStandings, standings } = props;
     useEffect(() => {
         getStandings();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,7 +56,7 @@ const StandingSection = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        standings: state.standings.standings,
+        standings: state.standings.divisions,
     };
 };
 
