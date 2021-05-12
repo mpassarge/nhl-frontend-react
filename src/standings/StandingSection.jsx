@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import StandingsCard from "./StandingsCard";
 import { Row } from "antd";
 import { connect } from "react-redux";
@@ -15,8 +15,6 @@ const StandingSection = (props) => {
     return (
         <section>
             <div className="actions">
-                {/* <p>Combined:&nbsp;</p>
-                <Switch onChange={combineStats} /> */}
             </div>
             <br />
             <Row gutter={[16, 24]}>

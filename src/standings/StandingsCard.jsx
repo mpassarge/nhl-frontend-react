@@ -36,7 +36,7 @@ const Title = (props) => {
     );
 };
 
-const StandingsCard = ({ divisionName, teams, isCombined }) => {
+const StandingsCard = ({ divisionName, teams }) => {
 
     const [pinned, setPinned] = useState(false);
 
