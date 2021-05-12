@@ -44,10 +44,9 @@ const StandingsCard = ({ divisionName, teams, isCombined }) => {
         setPinned(!pinned);
     }
 
-    const colWidthLarge = isCombined ? 24 : 12;
     return (
         <>
-            <Col xs={24} lg={colWidthLarge}>
+            <Col xs={24} lg={12}>
                 <Table
                     dataSource={teams}
                     columns={columns}
