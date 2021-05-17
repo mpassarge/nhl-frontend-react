@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import StandingsCard from "./StandingsCard";
 import { Row } from "antd";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getStandings } from "../actions/standingsActions";
 
-const StandingSection = (props) => {
-    const { getStandings, standings } = props;
-
+const StandingSection = () => {
+    const standings = useSelector(state => state.standings.divisions);
+    const dispatch = useDispatch()
+    
     useEffect(() => {
-        getStandings();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        dispatch(getStandings());
+    }, [dispatch]);
 
     return (
         <section>
@@ -18,11 +18,10 @@ const StandingSection = (props) => {
             </div>
             <br />
             <Row gutter={[16, 24]}>
-                {standings.map((standing) => (
+                {standings.map((division) => (
                     <StandingsCard
-                        key={standing.divisionName}
-                        divisionName={standing.divisionName}
-                        teams={standing.teams}
+                        key={division.divisionName}
+                        division={division}
                     />
                 ))}
             </Row>
@@ -30,10 +29,4 @@ const StandingSection = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        standings: state.standings.divisions,
-    };
-};
-
-export default connect(mapStateToProps, { getStandings })(StandingSection);
+export default StandingSection;

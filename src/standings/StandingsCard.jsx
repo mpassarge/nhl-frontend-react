@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { Col, Table } from "antd";
 import { PushpinTwoTone } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { PIN_DIVISION } from "../reducers/types";
 
 const columns = [
     {
@@ -27,33 +28,42 @@ const titleStyle = {
     fontSize: "1.3rem",
 };
 
-const Title = (props) => {    
+
+const Title = (props) => {
     return (
         <>
             <p style={titleStyle}>{props.divisionName.replace("-", " ")}</p>
-            <PushpinTwoTone onClick={props.pin} rotate={props.pinned ? -45 : 0} />
+            <PushpinTwoTone
+                onClick={props.pinDivision}
+                rotate={props.pinned ? -45 : 0}
+            />
         </>
     );
 };
 
-const StandingsCard = ({ divisionName, teams }) => {
+const StandingsCard = ({ division }) => {
+    const dispatch = useDispatch();
 
-    const [pinned, setPinned] = useState(false);
-
-    const pin = () => {
-        setPinned(!pinned);
+    const pinDivision = () => {
+        dispatch({type: PIN_DIVISION, payload: division.id});
     }
 
     return (
         <>
             <Col xs={24} lg={12}>
                 <Table
-                    dataSource={teams}
+                    dataSource={division.teams}
                     columns={columns}
                     bordered
                     size="small"
                     rowKey={(row) => row.id}
-                    title={() => <Title pinned={pinned} pin={pin} divisionName={divisionName}></Title>}
+                    title={() => (
+                        <Title
+                            pinDivision={pinDivision}
+                            pinned={division.pinned}
+                            divisionName={division.divisionName}
+                        ></Title>
+                    )}
                     pagination={false}
                 />
             </Col>

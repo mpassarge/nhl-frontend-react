@@ -1,1 +1,2 @@
 export const SET_STANDINGS = 'SET_STANDINGS';
+export const PIN_DIVISION = 'PIN_DIVISION';
